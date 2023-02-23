@@ -4,10 +4,11 @@ EXPOSE 7777
 
 WORKDIR /app
 
+COPY deps.js .
+
 RUN deno cache deps.js
 
 COPY . .
 
-COPY deps.js .
 
 CMD [ "run", "--allow-env", "--allow-net", "--allow-read", "--watch", "--unstable", "app.js" ]
