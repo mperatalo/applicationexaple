@@ -1,18 +1,12 @@
 import { renderFile } from "https://deno.land/x/eta@v2.0.0/mod.ts";
 import * as taskService from "../services/taskService.js";
+import * as workEntryService from "../services/workEntryService.js";
+import * as requestUtils from "../utils/requestUtils.js";
 
 const responseDetails = {
   headers: { "Content-Type": "text/html;charset=UTF-8" },
 };
 
-const redirectTo = (path) => {
-  return new Response(`Redirecting to ${path}.`, {
-    status: 303,
-    headers: {
-      "Location": path,
-    },
-  });
-};
 
 const addTask = async (request) => {
   const formData = await request.formData();
@@ -20,7 +14,7 @@ const addTask = async (request) => {
 
   await taskService.create(name);
 
-  return redirectTo("/tasks");
+  return requestUtils.redirectTo("/tasks");
 };
 
 const viewTasks = async (request) => {
