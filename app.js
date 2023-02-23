@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.171.0/http/server.ts";
+import { serve } from "./deps.js";
 import { configure } from "https://deno.land/x/eta@v2.0.0/mod.ts";
 import * as taskController from "./controllers/taskController.js";
 
