@@ -32,9 +32,18 @@ const viewTask = async (request) => {
     const data = {
       task: await taskService.findById(urlParts[2]),
       currentWorkEntry: await workEntryService.findCurrentWorkEntry(urlParts[2]),
+      totalTime: await workEntryService.calculateTotalTime(urlParts[2]),
     };
   
     return new Response(await renderFile("task.eta", data), responseDetails);
 };
 
-export { addTask, viewTasks, viewTask};
+const completeTask = async (request) => {
+  const url = new URL(request.url);
+  const urlParts = url.pathname.split("/");
+  await taskService.completeById(urlParts[2]);
+
+  return await requestUtils.redirectTo("/tasks");
+};
+
+export { addTask, viewTasks, viewTask, completeTask};

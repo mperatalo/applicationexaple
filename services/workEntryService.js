@@ -22,4 +22,17 @@ const finishWorkEntry = async (id) => {
     SET finished_on = NOW() WHERE id = ${ id }`;
 };
 
-export { createWorkEntry, findCurrentWorkEntry, finishWorkEntry };
+const calculateTotalTime = async (taskId) => {
+  const rows = await sql`SELECT SUM(finished_on - started_on) AS total_time
+      FROM work_entries
+      WHERE task_id = ${ taskId }
+        AND finished_on IS NOT NULL`;
+
+  if (rows && rows[0] && rows[0].total_time) {
+    return rows[0].total_time;
+  }
+
+  return 0;
+};
+
+export { createWorkEntry, findCurrentWorkEntry, finishWorkEntry, calculateTotalTime};

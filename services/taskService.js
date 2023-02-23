@@ -1,5 +1,9 @@
 import { sql } from "../database/database.js";
 
+const completeById = async (id) => {
+  await sql`UPDATE tasks SET completed = true WHERE id = ${ id }`;
+};
+
 const create = async (name) => {
   await sql`INSERT INTO tasks (name) VALUES (${ name })`;
 };
@@ -18,4 +22,4 @@ const findById = async (id) => {
   return { id: 0, name: "Unknown" };
 };
 
-export { create, findAllNonCompletedTasks, findById };
+export { completeById, create, findAllNonCompletedTasks, findById };
