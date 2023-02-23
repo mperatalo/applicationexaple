@@ -1,4 +1,4 @@
-import { renderFile } from "https://deno.land/x/eta@v2.0.0/mod.ts";
+import { renderFile } from "../deps.js";
 import * as taskService from "../services/taskService.js";
 import * as workEntryService from "../services/workEntryService.js";
 import * as requestUtils from "../utils/requestUtils.js";
