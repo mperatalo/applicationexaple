@@ -1,0 +1,19 @@
+<h1><%= it.task.name %></h1>
+
+<% if (!it.currentWorkEntry) { %>
+
+<h2>Start a work entry</h2>
+
+<form action="/tasks/<%= it.task.id %>/entries" method="POST">
+  <input type="submit" value="Start a work entry!" />
+</form>
+
+<% } else { %>
+
+<p>Current work entry started on <%= it.currentWorkEntry.started_on %></p>
+
+<form method="POST" action="/tasks/<%= it.task.id %>/entries/<%= it.currentWorkEntry.id %>">
+  <input type="submit" value="Finish work entry!" />
+</form>
+
+<% } %>
